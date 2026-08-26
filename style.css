@@ -11,7 +11,7 @@
   --surface-2:  #F5F7FA;
   --ink:        #0F161E;
   --ink-2:      #4C5A6A;
-  --ink-3:      #77848F;
+  --ink-3:      #5F6B76;
   --line:       #D2D9E1;
   --line-soft:  #E3E8EE;
 
@@ -30,6 +30,12 @@
   --bl-ink:     #FFFFFF;   /* 站碼牌上的字色 */
   --or-ink:     #2A1B00;
   --or-text:    #8A5A00;   /* 橘線用在文字上時要壓深才讀得到 */
+  --gr:         #00714A;   /* 松山新店線 */
+  --gr-ink:     #FFFFFF;
+  --gr-text:    #006B47;
+  --rd:         #D8002A;   /* 淡水信義線 */
+  --rd-ink:     #FFFFFF;
+  --rd-text:    #C10025;
 
   --shadow:     0 1px 2px rgba(15, 22, 30, .05), 0 6px 20px -12px rgba(15, 22, 30, .22);
 
@@ -45,7 +51,7 @@
     --surface-2:  #1B2430;
     --ink:        #E6ECF3;
     --ink-2:      #A2B0BF;
-    --ink-3:      #7C8896;
+    --ink-3:      #8794A2;
     --line:       #26313E;
     --line-soft:  #1F2833;
 
@@ -63,6 +69,12 @@
     --bl-ink:     #04121D;
     --or-ink:     #2A1B00;
     --or-text:    #F5B233;
+    --gr:         #35B37E;
+    --gr-ink:     #06170F;
+    --gr-text:    #35B37E;
+    --rd:         #F2707F;
+    --rd-ink:     #1C0409;
+    --rd-text:    #F2707F;
 
     --shadow:     0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px -14px rgba(0, 0, 0, .7);
   }
@@ -74,7 +86,7 @@
   --surface-2:  #1B2430;
   --ink:        #E6ECF3;
   --ink-2:      #A2B0BF;
-  --ink-3:      #7C8896;
+  --ink-3:      #8794A2;
   --line:       #26313E;
   --line-soft:  #1F2833;
 
@@ -92,6 +104,12 @@
   --bl-ink:     #04121D;
   --or-ink:     #2A1B00;
   --or-text:    #F5B233;
+  --gr:         #35B37E;
+  --gr-ink:     #06170F;
+  --gr-text:    #35B37E;
+  --rd:         #F2707F;
+  --rd-ink:     #1C0409;
+  --rd-text:    #F2707F;
 
   --shadow:     0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px -14px rgba(0, 0, 0, .7);
 }
@@ -701,6 +719,15 @@ main {
 
 .metro-head { display: flex; flex-direction: column; gap: .15rem; }
 
+.metro-kicker {
+  font-family: var(--mono);
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  color: var(--ink-3);
+  margin-bottom: .2rem;
+}
+
 .metro-title {
   font-family: var(--serif);
   font-weight: 700;
@@ -716,6 +743,9 @@ main {
 }
 
 .linemap { display: flex; flex-direction: column; }
+
+/* 同一區塊裡的第二張路線圖 */
+.metro + .metro { margin-top: .6rem; }
 
 /* 每一列：站碼牌 ｜ 路線軌道 ｜ 站名 */
 .stn, .leg {
@@ -754,6 +784,13 @@ main {
 .sg-or    { --lc-in: var(--or); --lc-out: var(--or); }
 .sg-end   { --lc-in: var(--or); }
 
+/* 回程：松山新店線綠 → 淡水信義線紅 */
+.sg-start-gr { --lc-out: var(--gr); }
+.sg-gr       { --lc-in: var(--gr); --lc-out: var(--gr); }
+.sg-xfer-gr  { --lc-in: var(--gr); --lc-out: var(--rd); }
+.sg-rd       { --lc-in: var(--rd); --lc-out: var(--rd); }
+.sg-end-rd   { --lc-in: var(--rd); }
+
 .dot {
   position: absolute;
   top: 50%;
@@ -769,6 +806,8 @@ main {
 
 .dot-bl { border-color: var(--bl); }
 .dot-or { border-color: var(--or); }
+.dot-gr { border-color: var(--gr); }
+.dot-rd { border-color: var(--rd); }
 
 .stn-major .dot { width: .95rem; height: .95rem; }
 
@@ -801,6 +840,8 @@ main {
 
 .code-bl { background: var(--bl); color: var(--bl-ink); }
 .code-or { background: var(--or); color: var(--or-ink); }
+.code-gr { background: var(--gr); color: var(--gr-ink); }
+.code-rd { background: var(--rd); color: var(--rd-ink); }
 
 .stn-name {
   font-size: 1rem;
@@ -835,6 +876,8 @@ main {
 
 .leg-bl { color: var(--bl); }
 .leg-or { color: var(--or-text); }
+.leg-gr { color: var(--gr-text); }
+.leg-rd { color: var(--rd-text); }
 
 .metro-notes {
   display: flex;
