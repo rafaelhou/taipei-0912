@@ -243,6 +243,7 @@ main {
 }
 
 .row-a    { border-left-color: var(--a); }
+.row-b    { border-left-color: var(--b); }
 .row-move { border-left-color: var(--ink-3); }
 .row-meet { border-left-color: var(--m); }
 
@@ -284,6 +285,7 @@ main {
 }
 
 .row-a .who    { color: var(--a); }
+.row-b .who    { color: var(--b); }
 .row-meet .who { color: var(--m); }
 
 .cell h3 {
