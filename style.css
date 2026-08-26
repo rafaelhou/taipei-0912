@@ -24,6 +24,13 @@
   --warn:       #8A4B12;
   --warn-bg:    #FBF1E5;
 
+  /* 捷運路線本色（板南線／中和新蘆線），用在路線圖上 */
+  --bl:         #0070BD;
+  --or:         #E39400;
+  --bl-ink:     #FFFFFF;   /* 站碼牌上的字色 */
+  --or-ink:     #2A1B00;
+  --or-text:    #8A5A00;   /* 橘線用在文字上時要壓深才讀得到 */
+
   --shadow:     0 1px 2px rgba(15, 22, 30, .05), 0 6px 20px -12px rgba(15, 22, 30, .22);
 
   --sans: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
@@ -51,6 +58,12 @@
     --warn:       #E0A755;
     --warn-bg:    #2A2114;
 
+    --bl:         #4FA3DE;
+    --or:         #F5B233;
+    --bl-ink:     #04121D;
+    --or-ink:     #2A1B00;
+    --or-text:    #F5B233;
+
     --shadow:     0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px -14px rgba(0, 0, 0, .7);
   }
 }
@@ -73,6 +86,12 @@
   --m-soft:     #102C22;
   --warn:       #E0A755;
   --warn-bg:    #2A2114;
+
+  --bl:         #4FA3DE;
+  --or:         #F5B233;
+  --bl-ink:     #04121D;
+  --or-ink:     #2A1B00;
+  --or-text:    #F5B233;
 
   --shadow:     0 1px 2px rgba(0, 0, 0, .3), 0 8px 24px -14px rgba(0, 0, 0, .7);
 }
@@ -665,6 +684,174 @@ main {
   color: var(--ink-3);
 }
 
+/* ---------------------------------------------------------- 路線圖 --- */
+
+.metro {
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+  padding: 1.5rem 1.5rem 1.35rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+.metro-head { display: flex; flex-direction: column; gap: .15rem; }
+
+.metro-title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: .03em;
+}
+
+.metro-meta {
+  font-family: var(--mono);
+  font-size: .78rem;
+  color: var(--ink-3);
+  letter-spacing: .02em;
+}
+
+.linemap { display: flex; flex-direction: column; }
+
+/* 每一列：站碼牌 ｜ 路線軌道 ｜ 站名 */
+.stn, .leg {
+  display: grid;
+  grid-template-columns: 4.6rem 1.6rem 1fr;
+  gap: 0 .9rem;
+  align-items: center;
+}
+
+.stn { min-height: 2.3rem; }
+.leg { min-height: 2.6rem; }
+
+/* 軌道：上半段與下半段各自上色，轉乘站因此能一半藍一半橘 */
+.rail {
+  position: relative;
+  align-self: stretch;
+  justify-self: center;
+  width: 1.6rem;
+}
+
+.rail::before,
+.rail::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 4px;
+  transform: translateX(-50%);
+}
+
+.rail::before { top: 0;   height: 50%; background: var(--lc-in, transparent); }
+.rail::after  { top: 50%; height: 50%; background: var(--lc-out, transparent); }
+
+.sg-start { --lc-out: var(--bl); }
+.sg-bl    { --lc-in: var(--bl); --lc-out: var(--bl); }
+.sg-xfer  { --lc-in: var(--bl); --lc-out: var(--or); }
+.sg-or    { --lc-in: var(--or); --lc-out: var(--or); }
+.sg-end   { --lc-in: var(--or); }
+
+.dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: .5rem;
+  height: .5rem;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 3px solid var(--ink-3);
+  z-index: 1;
+}
+
+.dot-bl { border-color: var(--bl); }
+.dot-or { border-color: var(--or); }
+
+.stn-major .dot { width: .95rem; height: .95rem; }
+
+/* 轉乘站沿用捷運指引的雙圈符號 */
+.dot-xfer {
+  width: 1.1rem;
+  height: 1.1rem;
+  border: 3px solid var(--ink);
+  box-shadow: 0 0 0 3px var(--surface);
+}
+
+.codes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .22rem;
+  justify-content: flex-end;
+}
+
+.code {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums;
+  font-size: .68rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+  line-height: 1.6;
+  padding: 0 .32rem;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.code-bl { background: var(--bl); color: var(--bl-ink); }
+.code-or { background: var(--or); color: var(--or-ink); }
+
+.stn-name {
+  font-size: 1rem;
+  font-weight: 500;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .1rem .6rem;
+}
+
+.stn-major .stn-name { font-weight: 700; font-size: 1.08rem; }
+
+.stn-tag {
+  font-size: .78rem;
+  font-weight: 400;
+  color: var(--ink-3);
+}
+
+.stn-tag-hot { color: var(--warn); font-weight: 500; }
+
+.stn-xfer .stn-name { font-weight: 700; font-size: 1.08rem; }
+
+.leg-text {
+  font-size: .85rem;
+  color: var(--ink-2);
+}
+
+.leg-line {
+  font-weight: 700;
+  margin-right: .15rem;
+}
+
+.leg-bl { color: var(--bl); }
+.leg-or { color: var(--or-text); }
+
+.metro-notes {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line-soft);
+}
+
+.metro-notes p {
+  font-size: .89rem;
+  color: var(--ink-2);
+}
+
+.hl-or {
+  font-weight: 700;
+  color: var(--or-text);
+}
+
 /* ------------------------------------------------------------ 窄螢幕 --- */
 
 @media (max-width: 44rem) {
@@ -699,6 +886,20 @@ main {
   }
 
   .facts > div { grid-template-columns: 4.25rem 1fr; gap: .6rem; }
+
+  .metro { padding: 1.25rem 1.1rem 1.15rem; }
+
+  .stn, .leg {
+    grid-template-columns: 3.4rem 1.4rem 1fr;
+    gap: 0 .65rem;
+  }
+
+  .stn-name { font-size: .95rem; }
+  .stn-major .stn-name,
+  .stn-xfer .stn-name { font-size: 1.02rem; }
+
+  /* 窄螢幕站名與註記一定要換行，不然擠成一團 */
+  .stn-tag { flex-basis: 100%; }
 }
 
 /* ------------------------------------------------------------- 列印 --- */
