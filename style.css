@@ -1055,6 +1055,9 @@ main {
 
 .tt-dur, .tt-train { color: var(--ink-3); font-size: .85rem; }
 
+/* 主要欄位（台北發車）比參考欄位重 */
+.tt-strong { font-weight: 700; }
+
 .tt-note { width: 99%; }
 
 /* 建議車次整列提亮 */
