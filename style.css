@@ -944,6 +944,14 @@ main {
   stroke-linejoin: round;
 }
 
+.m-offarrow {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .m-compass path { fill: var(--ink-3); }
 .m-scale { stroke: var(--ink-3); stroke-width: 2; }
 
@@ -988,6 +996,85 @@ main {
 
 .m-anchor-mid { text-anchor: middle; }
 .m-anchor-end { text-anchor: end; }
+
+/* Google 地圖連結 */
+
+.gmaps {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line-soft);
+}
+
+.gmaps-title {
+  font-family: var(--serif);
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: .03em;
+}
+
+.gmaps-lead {
+  font-size: .89rem;
+  color: var(--ink-2);
+  max-width: 46em;
+}
+
+.gmaps-sub {
+  font-family: var(--mono);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  color: var(--ink-3);
+  margin-top: .6rem;
+}
+
+.gmaps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: .5rem;
+}
+
+.gm {
+  display: flex;
+  flex-direction: column;
+  gap: .1rem;
+  padding: .65rem .85rem;
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--ink-3);
+  border-radius: 3px;
+  background: var(--surface-2);
+  text-decoration: none;
+  transition: border-color .12s ease, background-color .12s ease;
+}
+
+.gm-a { border-left-color: var(--a); }
+.gm-b { border-left-color: var(--b); }
+.gm-m { border-left-color: var(--m); }
+
+.gm:hover {
+  background: var(--surface);
+  border-color: var(--ink-3);
+}
+
+.gm-a:hover { border-color: var(--a); }
+.gm-b:hover { border-color: var(--b); }
+.gm-m:hover { border-color: var(--m); }
+
+.gm-name {
+  font-size: .95rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.gm-a .gm-name { color: var(--a); }
+.gm-b .gm-name { color: var(--b); }
+.gm-m .gm-name { color: var(--m); }
+
+.gm-sub {
+  font-size: .78rem;
+  color: var(--ink-3);
+}
 
 /* 已訂位徽章 */
 .booked {
