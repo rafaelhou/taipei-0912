@@ -997,6 +997,110 @@ main {
 .m-anchor-mid { text-anchor: middle; }
 .m-anchor-end { text-anchor: end; }
 
+/* 高鐵時刻表 */
+
+.hsrcard {
+  background: var(--surface);
+  border: 1px solid var(--line-soft);
+  border-radius: 3px;
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+}
+
+/* 窄螢幕讓表格自己橫向捲，不要把整頁撐開 */
+.tt-wrap { overflow-x: auto; }
+
+.tt {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+
+.tt-cap {
+  caption-side: bottom;
+  text-align: left;
+  padding-top: .8rem;
+  font-size: .85rem;
+  color: var(--ink-3);
+}
+
+.tt th {
+  text-align: left;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  color: var(--ink-3);
+  padding: 0 .9rem .55rem 0;
+  border-bottom: 1px solid var(--line);
+  white-space: nowrap;
+}
+
+.tt td {
+  padding: .5rem .9rem .5rem 0;
+  border-bottom: 1px solid var(--line-soft);
+  white-space: nowrap;
+}
+
+.tt tbody tr:last-child td { border-bottom: 0; }
+
+.tt-num {
+  font-family: var(--mono);
+  font-size: .93rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.tt-dur, .tt-train { color: var(--ink-3); font-size: .85rem; }
+
+.tt-note { width: 99%; }
+
+/* 建議車次整列提亮 */
+.tt-pick td {
+  background: var(--m-soft);
+  border-bottom-color: var(--m);
+}
+
+.tt-pick .tt-num { color: var(--m); font-weight: 600; }
+.tt-pick .tt-dur, .tt-pick .tt-train { color: var(--m); }
+
+.tt-last td { background: var(--warn-bg); }
+.tt-last .tt-num { color: var(--warn); font-weight: 600; }
+
+.tt-tag {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: .64rem;
+  font-weight: 600;
+  letter-spacing: .1em;
+  border-radius: 2px;
+  padding: .05rem .4rem;
+  border: 1px solid var(--line);
+  color: var(--ink-3);
+  white-space: nowrap;
+}
+
+.tt-tag-pick { color: var(--m); border-color: var(--m); background: var(--surface); }
+.tt-tag-alt  { color: var(--a); border-color: var(--a); }
+.tt-tag-last { color: var(--warn); border-color: var(--warn); background: var(--surface); }
+.tt-tag-fast { color: var(--ink-2); }
+
+.hsr-notes {
+  display: flex;
+  flex-direction: column;
+  gap: .55rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line-soft);
+}
+
+.hsr-notes p {
+  font-size: .89rem;
+  color: var(--ink-2);
+  max-width: 46em;
+}
+
 /* Google 地圖連結 */
 
 .gmaps {
